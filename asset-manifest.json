@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/middle-block-reaction-trainer/static/js/main.ce9ff914.js",
+    "main.js": "/middle-block-reaction-trainer/static/js/main.dc5b553f.js",
     "static/js/787.e8c2289e.chunk.js": "/middle-block-reaction-trainer/static/js/787.e8c2289e.chunk.js",
     "service-worker.js": "/middle-block-reaction-trainer/service-worker.js",
     "static/media/beep.mp3": "/middle-block-reaction-trainer/static/media/beep.44d80d2e608a80573cfa.mp3",
@@ -8,10 +8,10 @@
     "static/media/middle.mp3": "/middle-block-reaction-trainer/static/media/middle.b3c798ce6994be49ac97.mp3",
     "static/media/right.mp3": "/middle-block-reaction-trainer/static/media/right.dc518baa312a7c412942.mp3",
     "index.html": "/middle-block-reaction-trainer/index.html",
-    "main.ce9ff914.js.map": "/middle-block-reaction-trainer/static/js/main.ce9ff914.js.map",
+    "main.dc5b553f.js.map": "/middle-block-reaction-trainer/static/js/main.dc5b553f.js.map",
     "787.e8c2289e.chunk.js.map": "/middle-block-reaction-trainer/static/js/787.e8c2289e.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.ce9ff914.js"
+    "static/js/main.dc5b553f.js"
   ]
 }
