@@ -4,6 +4,14 @@ import LandingScreen from './screens/LandingScreen';
 import TrainingScreen from './screens/TrainingScreen';
 import CountdownScreen from './screens/CountdownScreen';
 
+// Work around for ios safari audio
+import beepsound from "./sounds/beep.mp3";
+import leftsound from "./sounds/left.mp3";
+import rightsound from "./sounds/right.mp3";
+import middlesound from "./sounds/middle.mp3";
+
+const default_sound = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf"
+
 const PageHolder = styled.div`
   position: absolute;
   top: 0;
@@ -40,6 +48,30 @@ function App() {
   const [reps, setReps] = useState(10);
   const [delay, setDelay] = useState(10);
 
+  const sound = new Audio();
+  sound.autoplay = true;
+  sound.src = default_sound;
+
+  const playSound = (output) => {
+    switch (output) {
+      case "beep":
+        sound.src = beepsound;
+        break;
+      case "left":
+        sound.src = leftsound;
+        break;
+      case "right":
+        sound.src = rightsound;
+        break;
+      case "middle":
+        sound.src = middlesound;
+        break;
+      default:
+        sound.src = default_sound;
+    }
+  }
+
+
   const onStart = () => {
     setState("Countdown");
   }
@@ -55,7 +87,7 @@ function App() {
       </TitleHolder>
       {state === "LandingScreen" && <LandingScreen onStart={onStart} reps={reps} setReps={setReps} delay={delay} setDelay={setDelay} />}
       {state === "Countdown" && <CountdownScreen onEnd={onCountdownEnd} />}
-      {state === "Running" && <TrainingScreen reps={reps} delay={delay} state={state} setState={setState} />}
+      {state === "Running" && <TrainingScreen reps={reps} delay={delay} state={state} setState={setState} playSound={playSound} />}
     </PageHolder>
   );
 }

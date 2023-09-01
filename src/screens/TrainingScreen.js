@@ -1,10 +1,6 @@
 import { styled } from "styled-components";
 import Button from "../utils/Button";
 import { useEffect, useState } from "react";
-import beepsound from "../sounds/beep.mp3";
-import leftsound from "../sounds/left.mp3";
-import rightsound from "../sounds/right.mp3";
-import middlesound from "../sounds/middle.mp3";
 
 const Holder = styled.div`
 	grid-area: 3 / 2 / 5 / 3;
@@ -21,35 +17,16 @@ const DirectionSymbol = styled.p`
 	margin: 0;
 `
 
-function TrainingScreen({ reps, delay, state, setState }) {
+function TrainingScreen({ reps, delay, state, setState, playSound}) {
 	const [currentRep, setCurrentRep] = useState(1);
 	const [direction, setDirection] = useState(0);
 	const directions = ["left", "right", "middle"]
 
-	const left = new Audio(leftsound);
-	left.volume = 1.0;
-	const right = new Audio(rightsound);
-	right.volume = 1.0;
-	const middle = new Audio(middlesound);
-	middle.volume = 1.0;
-	const beep = new Audio(beepsound);
-	beep.sound = 0.5;
-	const sounds = [left, right, middle];
-
-
-	const showRandomDirection = () => {
-
-		if (currentRep <= reps) {
-			setTimeout(showRandomDirection, delay * 1000);
-		}
-		console.log(currentRep + 1)
-	}
-
 	useEffect(() => {
 		if (currentRep <= reps && state === "Running") {
-			beep.play();
+			playSound("beep");
 			const soundsTimeout = setTimeout(() => {
-				sounds[direction].play();
+				playSound(directions[direction]);
 			}, 600)	;
 
 			const timeout = setTimeout(() => {
@@ -80,9 +57,9 @@ function TrainingScreen({ reps, delay, state, setState }) {
 			<h2>{currentRep} / {reps} reps</h2>
 			<p>{directions[direction]}</p>
 			<DirectionSymbol>
-				{direction === 0 ? "🡄" : ""}
-				{direction === 1 ? "🡆" : ""}
-				{direction === 2 ? "⏺" : ""}
+				{direction === 0 ? "⬅️" : ""}
+				{direction === 1 ? "➡️" : ""}
+				{direction === 2 ? "⏺️" : ""}
 			</DirectionSymbol>
 			<Button action={() => setState("LandingScreen")}>Stop</Button>
 		</Holder>
